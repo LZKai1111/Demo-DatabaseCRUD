@@ -25,6 +25,8 @@ public class EditActivity extends AppCompatActivity {
         etContent = findViewById(R.id.etContent);
         btnUpdate = findViewById(R.id.btnUpdate);
         btnDelete = findViewById(R.id.btnDelete);
+        tvID = findViewById(R.id.tvID);
+
 
         Intent i = getIntent();
         data = (Note) i.getSerializableExtra("data");
@@ -53,5 +55,8 @@ public class EditActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+
     }
 }
