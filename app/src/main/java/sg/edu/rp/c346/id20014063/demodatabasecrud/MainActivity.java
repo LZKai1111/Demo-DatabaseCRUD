@@ -3,7 +3,9 @@ package sg.edu.rp.c346.id20014063.demodatabasecrud;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -82,5 +84,33 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         btnRetrieve.performClick();
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String strName = etName.getText().toString();
+        Boolean cbVeg = Boolean.parseBoolean(cbVeg.getText().toString());
+
+
+        if(rg.getCheckedRadioButtonId() == R.id.rbNotSpicy)
+        {
+            String spicy = "not spicy";
+        }
+        else if(rg.getCheckedRadioButtonId() == R.id.rbMildSpicy)
+        {
+            String spicy = "mild spicy";
+        }
+        else if(rg.getCheckedRadioButtonId() == R.id.rbSpicy)
+        {
+            String spicy = "spicy";
+        }
+
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor prefEdit = prefs.edit();
+        prefEdit.putString("name", strName);
+        prefEdit.commit();
     }
 }

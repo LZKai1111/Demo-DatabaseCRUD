@@ -12,13 +12,13 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "simplenotes.db";
-    private static final int DATAVASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NOTE = "note";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NOTE_CONTENT = "note_content";
 
     public DBHelper(@Nullable Context context){
-        super(context, DATABASE_NAME, null, DATAVASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -28,6 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_NOTE_CONTENT + " TEXT ) ";
         db.execSQL(sql);
 
+        //Dummy records, to be inserted when the database is created
         for (int i=0; i<4; i++){
             ContentValues values = new ContentValues();
             values.put(COLUMN_NOTE_CONTENT, "Data number " + i);
@@ -42,7 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public long insertNote(String noteContent){
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         //ID not needed as it is autoincrement
         values.put(COLUMN_NOTE_CONTENT, noteContent);
